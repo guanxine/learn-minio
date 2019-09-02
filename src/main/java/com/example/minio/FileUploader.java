@@ -4,14 +4,16 @@ import io.minio.MinioClient;
 import io.minio.ObjectStat;
 import io.minio.Result;
 import io.minio.errors.MinioException;
-import io.minio.messages.Item;
+import io.minio.messages.*;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FileUploader {
@@ -21,6 +23,8 @@ public class FileUploader {
             // Create a minioClient with the MinIO Server name, Port, Access key and Secret key.
             MinioClient minioClient = new MinioClient("http://localhost:9000", "admin", "11111111");
 
+
+
             // Check if the bucket already exists.
             boolean isExist = minioClient.bucketExists("bucket1");
             if(isExist) {
@@ -29,6 +33,25 @@ public class FileUploader {
                 // Make a new bucket called asiatrip to hold a zip file of photos.
                 minioClient.makeBucket("bucket1");
             }
+
+//            final NotificationConfiguration notificationConfiguration = minioClient.getBucketNotification("bucket1");
+//            final List<QueueConfiguration> queueConfigurations =
+//                    notificationConfiguration.queueConfigurationList();
+//            final QueueConfiguration queueConfiguration =
+//                    new QueueConfiguration();
+//            queueConfiguration.setQueue("arn:minio:sqs::1:amqp");
+//            queueConfiguration.setEvents(Arrays.asList(EventType.OBJECT_ACCESSED_ANY));
+////
+//            Filter filter = new Filter();
+//            filter.setPrefixRule("*");
+//            filter.setSuffixRule("*");
+//            queueConfiguration.setFilter(filter);
+//
+//            queueConfigurations.add(queueConfiguration);
+//            notificationConfiguration.setQueueConfigurationList(queueConfigurations);
+//
+//            // Set updated notification configuration.
+//            minioClient.setBucketNotification("bucket1", notificationConfiguration);
 
             // Upload the zip file to the bucket with putObject
 //            minioClient.putObject("bucket1","kmx-ui.zip", "/home/guanxine/dev.kmx.k2data.com.cn:5001#k2data#kmx-ui#2.1.3.tgz");
