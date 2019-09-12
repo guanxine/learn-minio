@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Recv {
 
-    public static final String QUEUE_NAME = "hello";
+    public static final String QUEUE_NAME = "hello_durable";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         final ConnectionFactory connectionFactory = new ConnectionFactory();
@@ -20,7 +20,7 @@ public class Recv {
         final Connection connection = connectionFactory.newConnection();
         final Channel channel =
                 connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             final String message = new String(delivery.getBody(), "UTF-8");
             System.out.println(" [x] Received '" + message + "'");

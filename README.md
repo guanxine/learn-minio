@@ -301,3 +301,13 @@ Object API (Amazon S3 compatible):
    Python:     https://docs.min.io/docs/python-client-quickstart-guide
    JavaScript: https://docs.min.io/docs/javascript-client-quickstart-guide
    .NET:       https://docs.min.io/docs/dotnet-client-quickstart-guide
+   
+   
+## 使用 hdfs
+
+hadoop-aws 和 hdfs 关系
+minio 和 hdfs 关系
+
+
+
+(https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html)

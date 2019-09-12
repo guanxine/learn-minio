@@ -5,7 +5,7 @@ import com.rabbitmq.client.*;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-public class EventRecv {
+public class EventRecv1 {
 
     public static final String BUCKET_QUEUE = "bucketqueues";
 
@@ -32,20 +32,9 @@ public class EventRecv {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             final String message = new String(delivery.getBody(), "UTF-8");
-
-
-            System.out.println(" [x] Received '" + message + "'");
+            System.out.println(" [x] Received '" + message + "'"); // 如果失败了
         };
-        channel.basicConsume(BUCKET_QUEUE, true, new DeliverCallback() {
-            @Override
-            public void handle(String consumerTag, Delivery delivery) throws IOException {
-                final String message = new String(delivery.getBody(), "UTF-8");
-
-
-                System.out.println(" [x] Received '" + message + "'");
-            }
-        }, consumerTag -> {
-        });
+        channel.basicConsume(BUCKET_QUEUE, true, deliverCallback, consumerTag -> {});
 
     }
 }
